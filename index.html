@@ -1,24 +1,83 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Put your description here.">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Planrr</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
+    <base href="/">
+  </head>
+  <body>
+    <style>
+    html {
+      box-sizing: border-box;
+      height: 100%;
     }
-  </style>
-  <title>edinburgh-cycles</title>
-</head>
-<body>
-  <edinburgh-cycles heading="Hello world!"></edinburgh-cycles>
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    body{
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: Arial, Helvetica, sans-serif;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    header{
+      height: 70px;
+      width: 100%;
+      background: #efefef;
+      padding: 8px;
+    }
+    header button{
+      position: absolute;
+      border: 0;
+      background: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    header svg#logo{
+      display: block;
+      height: 50px;
+      width: auto;
+      margin: 0 auto;
+    }
 
-  <script type="module" src="./src/edinburgh-cycles.js"></script>
-</body>
+    nav{
+      background: pink;
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      transform: translateX(-100%);
+      transition: 0.5s transform;
+    }
+    nav.visible{
+      transform: translateX(0);
+    }
+    .overlay{
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #363636;
+      opacity: 0;
+      display: none;
+      transition: 0.5s opacity;
+    }
+    .overlay.visible{
+      opacity: 0.5;
+      display: block;
+    }
+    </style>
+    <div class="overlay" aria-hidden="true"></div>
+    <header role="heading" aria-label="Application header, contains logo">
+      <svg id="logo" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" height="23.448mm" version="1.1" viewBox="0 0 64.732002 23.448067" width="64.732mm" xmlns="http://www.w3.org/2000/svg"><g _ngcontent-c2="" transform="translate(92.842 -137.11)"><path _ngcontent-c2="" d="m-79.397 139.33c5.1616-2.4376 16.347-2.1595 16.347-2.1595v6.2007h-22.584s1.075-1.6036 6.2366-4.0412z" fill="#f2a600"></path><path _ngcontent-c2="" d="m-89.867 151.2h61.757l-8.7775 4.9462h-30.538s-3.4479-0.10804-5.4175 1.1773-2.9893 3.1847-2.9893 3.1847h-8.752s-8.2573-3.2729-8.2573-4.5889 2.9747-4.7193 2.9747-4.7193z" fill="#f2a600"></path><text _ngcontent-c2="" xml:space="preserve" fill="#013a58" font-family="sans-serif" font-size="15.852px" letter-spacing="0px" stroke-width=".39629" style="line-height:1.25" word-spacing="0px" x="-84.45739" y="153.79601"><tspan _ngcontent-c2="" dx="0" fill="#013a58" font-family="Arial, Helvetica, sans-serif" letter-spacing="0px" stroke-width=".39629" x="-84.45739" y="153.79601">Planrr</tspan></text></g><text _ngcontent-c2="" xml:space="preserve" fill="#a7a7a7" fill-opacity=".98824" font-family="sans-serif" font-size="5.5721px" letter-spacing="0px" stroke-width=".1393" style="line-height:1.25" word-spacing="0px" x="40.560932" y="23.338408"><tspan _ngcontent-c2="" fill="#a7a7a7" fill-opacity=".98824" font-family="Arial, Helvetica, sans-serif" font-weight="bolder" letter-spacing="0px" stroke-width=".2393" x="40.560932" y="23.338408">ALPHA</tspan></text></svg>
+    </header>
 
+    <router-slot>
+    </router-slot>
+
+    <script src="main.js"></script>
+  </body>
 </html>
