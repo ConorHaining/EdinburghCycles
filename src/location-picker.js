@@ -26,11 +26,12 @@ export class LocationPicker extends LitElement {
     }
   }
 
-  selectStation(e) {
+  selectLocation(e) {
     this.toggleWindow();
-    const station = JSON.parse(e.target.getAttribute('data-station'));
-    this.shadowRoot.querySelector('input.formField').value = station.name;
-    this.selectedStation = station;
+    const coordinates = JSON.parse(e.target.getAttribute('data-coordinates'));
+    const street = e.target.innerText;
+    this.shadowRoot.querySelector('input.formField').value = street;
+    this.selectedLocation = coordinates;
   }
 
   getCurrentLocation() {
@@ -116,7 +117,10 @@ export class LocationPicker extends LitElement {
             ${this.locations.map(
               address =>
                 html`
-                  <li data-coordinates="${JSON.stringify(address.geometry)}">
+                  <li
+                    data-coordinates="${JSON.stringify(address.geometry)}"
+                    @click="${this.selectLocation}"
+                  >
                     ${address.place_name}
                   </li>
                 `,
