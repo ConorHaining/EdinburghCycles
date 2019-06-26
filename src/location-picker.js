@@ -3,12 +3,18 @@ import { classMap } from 'lit-html/directives/class-map.js';
 import { MapboxGeocoder } from './services/mapbox-geocoder';
 
 export class LocationPicker extends LitElement {
+  constructor() {
+    super();
+
+    this.locations = [];
+  }
+
   static get properties() {
     return {
       showModal: { type: Boolean },
       inputLabel: { type: String },
       selectedLocation: { type: Object, reflect: true },
-      locations: { type: Object },
+      locations: { type: Array },
     };
   }
 
@@ -79,11 +85,11 @@ export class LocationPicker extends LitElement {
     `;
   }
 
-  handleInput(e) {
+  async textSearch(e) {
     const query = e.target.value;
     this.shadowRoot.querySelector('.modal-search').value = query;
 
-    MapboxGeocoder.findCoordinates(query);
+    this.locations = await MapboxGeocoder.findCoordinates(query);
   }
 
   render() {
@@ -105,8 +111,17 @@ export class LocationPicker extends LitElement {
           <button @click="${this.getCurrentLocation}">Use Current Location</button>
         </header>
         <section>
-          <input type="search" class="modal-search" @input="${this.handleInput}" />
-          <ul></ul>
+          <input type="search" class="modal-search" @input="${this.textSearch}" />
+          <ul class="results-list">
+            ${this.locations.map(
+              address =>
+                html`
+                  <li data-coordinates="${JSON.stringify(address.geometry)}">
+                    ${address.place_name}
+                  </li>
+                `,
+            )}
+          </ul>
         </section>
       </div>
     `;
