@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64.732mm" height="23.345mm" version="1.1" viewBox="0 0 64.731995 23.344908" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<circle transform="scale(-1,1)" cx="-12.753" cy="17.602" r="5.4143" fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.0468"/>
+<path d="m17.634 4.7305 1.2939 0.56606-0.83579 2.0215 4.2052 7.4398 1.3209 1.0514 2.2372 0.05401 3.2886-8.5182 0.60387 0.23658-1.296 3.5168 5.7278 6.5091-1.7535 0.32408-4.9368-0.01918-0.21929 0.97224-0.86718 0.7813-0.86718 0.10479-0.8769-0.24765-0.60036-0.5242-0.27628-0.57173-0.02863-0.29545-1.1246-0.58145-1.1913-1.1246-4.0464-6.7084-3.9354 8.2214-0.70406-0.40618zm10.646 6.9205-1.6488 4.3459h5.5466z" fill="#013a58"/>
+<circle transform="scale(-1,1)" cx="-33.494" cy="17.325" r="5.4143" fill="none" stroke="#1a1a1a" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.0468"/>
+<path d="m31.845 7.391-1.0769 0.18108-1.0197 0.00953-1.2008-0.44793-1.7155-0.37168-0.0095-0.24779 0.30497-0.28591 0.79102-0.028592 1.2771 0.28591 1.8012-0.038124 0.5337 0.11436 0.36215 0.35262z" fill="#333"/>
+<circle transform="scale(-1,1)" cx="-33.494" cy="17.325" r="1.0474" fill="#1a1a1a" fill-opacity=".99608"/>
+<circle transform="scale(-1,1)" cx="-12.753" cy="17.325" r="1.0474" fill="#1a1a1a" fill-opacity=".99608"/>
+<text x="8.240716" y="14.529499" fill="#ba001f" font-family="sans-serif" font-size="20.797px" letter-spacing="0px" stroke-width=".51991" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="8.240716" y="14.529499" dx="0" fill="#ba001f" font-family="BritishRailDarkNormal" letter-spacing="0px" stroke-width=".51991">Planrr</tspan></text>
+<text x="55.831322" y="17.253538" fill="#808080" font-family="sans-serif" font-size="2.5471px" font-weight="bold" letter-spacing="0px" stroke-width=".063677" text-anchor="end" word-spacing="0px" style="line-height:1.25" xml:space="preserve"><tspan x="56.716831" y="17.253538" text-align="end" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Edinburgh </tspan><tspan x="55.831322" y="20.437395" text-align="end" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Cycle Hire</tspan></text>
+</svg>
