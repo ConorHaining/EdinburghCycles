@@ -11,4 +11,19 @@ export class MapboxGeocoder {
         .catch(err => reject(err));
     });
   }
+
+  static geoEncodeCoordinates(position) {
+    const coordinate = position.coordinates[0].split(',');
+    const longitude = coordinate[0];
+    const latitude = coordinate[1];
+
+    return new Promise((resolve, reject) => {
+      fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${key}&types=address`,
+      )
+        .then(res => res.json())
+        .then(result => resolve(result.features[0].place_name))
+        .catch(err => reject(err));
+    });
+  }
 }

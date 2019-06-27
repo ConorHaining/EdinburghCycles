@@ -35,9 +35,29 @@ export class LocationPicker extends LitElement {
   }
 
   getCurrentLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-      this.stations = this._stationInfo.findClosest(position.coords);
+    // TODO loading icons or state
+    navigator.geolocation.getCurrentPosition(async position => {
+      const formattedCoordinates = this.formatGeolocationCoordinates(position);
+      this.selectLocation = formattedCoordinates;
+
+      const street = await MapboxGeocoder.geoEncodeCoordinates(formattedCoordinates);
+      this.shadowRoot.querySelector('input.formField').value = street;
+      this.shadowRoot.querySelector('.modal-search').value = street;
     });
+  }
+
+  static formatGeolocationCoordinates(position) {
+    return {
+      type: 'Point',
+      coordinates: [`${position.coords.longitude}, ${position.coords.latitude}`],
+    };
+  }
+
+  async textSearch(e) {
+    const query = e.target.value;
+    this.shadowRoot.querySelector('.modal-search').value = query;
+
+    this.locations = await MapboxGeocoder.findCoordinates(query);
   }
 
   static get styles() {
@@ -84,13 +104,6 @@ export class LocationPicker extends LitElement {
         border-bottom: 1px solid black;
       }
     `;
-  }
-
-  async textSearch(e) {
-    const query = e.target.value;
-    this.shadowRoot.querySelector('.modal-search').value = query;
-
-    this.locations = await MapboxGeocoder.findCoordinates(query);
   }
 
   render() {
