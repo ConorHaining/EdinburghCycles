@@ -1,6 +1,21 @@
 import { html, css, LitElement } from 'lit-element';
+import { JourneyPlanner } from './services/journey-planner';
 
 export class JourneySearch extends LitElement {
+  performSearch(e) {
+    e.preventDefault();
+    const journeyPlanner = new JourneyPlanner();
+
+    const pickers = this.shadowRoot.querySelectorAll('location-picker');
+    const from = pickers[0].getAttribute('selectedlocation');
+    const to = pickers[1].getAttribute('selectedlocation');
+
+    journeyPlanner
+      .setFrom(from)
+      .setTo(to)
+      .build();
+  }
+
   static get styles() {
     return css`
       :host {
@@ -24,7 +39,7 @@ export class JourneySearch extends LitElement {
         <div class="location-picker">
           <location-picker inputlabel="To"></location-picker>
         </div>
-        <input type="submit" name="search" value="Search" />
+        <input type="submit" name="search" value="Search" @click="${this.performSearch}" />
       </form>
     `;
   }
