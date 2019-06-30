@@ -2,18 +2,31 @@ import { html, css, LitElement } from 'lit-element';
 import { JourneyPlanner } from './services/journey-planner';
 
 export class JourneySearch extends LitElement {
-  performSearch(e) {
-    e.preventDefault();
+  constructor() {
+    super();
+
+    this.from = null;
+    this.to = null;
+  }
+
+  performSearch(event) {
+    event.preventDefault();
     const journeyPlanner = new JourneyPlanner();
 
-    const pickers = this.shadowRoot.querySelectorAll('location-picker');
-    const from = pickers[0].getAttribute('selectedlocation');
-    const to = pickers[1].getAttribute('selectedlocation');
-
     journeyPlanner
-      .setFrom(from)
-      .setTo(to)
+      .setFrom(this.from)
+      .setTo(this.to)
       .build();
+  }
+
+  updateFrom(event) {
+    const { coordinates } = event.detail;
+    this.from = coordinates;
+  }
+
+  updateTo(event) {
+    const { coordinates } = event.detail;
+    this.to = coordinates;
   }
 
   static get styles() {
@@ -34,10 +47,10 @@ export class JourneySearch extends LitElement {
     return html`
       <form>
         <div class="location-picker">
-          <location-picker inputlabel="From"></location-picker>
+          <location-picker inputlabel="From" @locationSelected=${this.updateFrom}></location-picker>
         </div>
         <div class="location-picker">
-          <location-picker inputlabel="To"></location-picker>
+          <location-picker inputlabel="To" @locationSelected=${this.updateTo}></location-picker>
         </div>
         <input type="submit" name="search" value="Search" @click="${this.performSearch}" />
       </form>

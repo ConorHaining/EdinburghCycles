@@ -13,7 +13,7 @@ export class LocationPicker extends LitElement {
     return {
       showModal: { type: Boolean },
       inputLabel: { type: String },
-      selectedLocation: { type: Object, reflect: true },
+      selectedLocation: { type: Object },
       locations: { type: Array },
     };
   }
@@ -32,6 +32,14 @@ export class LocationPicker extends LitElement {
     const street = e.target.innerText;
     this.shadowRoot.querySelector('input.formField').value = street;
     this.selectedLocation = coordinates;
+
+    const event = new CustomEvent('locationSelected', {
+      detail: {
+        coordinates,
+      },
+    });
+
+    this.dispatchEvent(event);
   }
 
   getCurrentLocation() {
