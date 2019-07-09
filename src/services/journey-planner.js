@@ -1,3 +1,5 @@
+import { key } from './mapbox-key';
+
 export class JourneyPlanner {
   // stationInformation;
 
@@ -7,6 +9,7 @@ export class JourneyPlanner {
 
     this.fromBikeStation = undefined;
     this.toBikeStation = undefined;
+    this.stages = [];
   }
 
   static fetchStations() {
@@ -106,9 +109,39 @@ export class JourneyPlanner {
       throw new Error('Station information or status is not available');
     }
 
-    this.findFromBikeStation().findToBikeStation();
+    const result = await this.findFromBikeStation()
+      .findToBikeStation()
+      .getDirections(this.from, this.fromBikeStation, 'walking')
+      .getDirections(this.fromBikeStation, this.toBikeStation, 'cycling')
+      .getDirections(this.toBikeStation, this.to, 'walking');
+
+    return Object.freeze(result);
+  }
+
+  getDirections(from, to, mode) {
+    const fromStr = this.createLongLatString(from);
+    const toStr = this.createLongLatString(to);
+
+    fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/${mode}/${fromStr};${toStr}.json?access_token=${key}&overview=full&steps=true&banner_instructions=true`,
+    )
+      .then(response => response.json())
+      .then(json => this.stages.push(json))
+      .catch(err => {
+        throw err;
+      });
 
     return this;
+  }
+
+  static createLongLatString(point) {
+    if ('coordinates' in point) {
+      return point.coordinates.join(',');
+    }
+    if ('lat' in point && 'lon' in point) {
+      return `${point.lon},${point.lat}`;
+    }
+    throw new Error('Could not transform points');
   }
 
   sortStationsByDistance(point) {

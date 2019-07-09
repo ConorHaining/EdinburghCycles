@@ -9,14 +9,18 @@ export class JourneySearch extends LitElement {
     this.to = null;
   }
 
-  performSearch(event) {
+  async performSearch(event) {
     event.preventDefault();
     const journeyPlanner = new JourneyPlanner();
 
-    journeyPlanner
+    let journey = await journeyPlanner
       .setFrom(this.from)
       .setTo(this.to)
       .build();
+
+    journey = JSON.stringify(journey);
+
+    sessionStorage.setItem('journey', journey);
   }
 
   updateFrom(event) {
